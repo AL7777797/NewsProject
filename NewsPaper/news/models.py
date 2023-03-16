@@ -6,16 +6,6 @@ class Author(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     author_rating = models.IntegerField()
 
-
-''' comment_rating = models.ForeignKey('Comment', on_delete=models.CASCADE)
-    post_rating = models.ForeignKey('Post', on_delete=models.CASCADE)
-
-    def update_rating(self):
-        overall_rating = self.comment_rating+self.post_rating
-
-    '''
-
-
 class Category(models.Model):
     tag_name = models.CharField(max_length=50, unique=True)
 
