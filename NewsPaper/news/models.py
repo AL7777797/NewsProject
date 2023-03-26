@@ -9,6 +9,9 @@ class Author(models.Model):
 class Category(models.Model):
     tag_name = models.CharField(max_length=50, unique=True)
 
+    def __str__(self):
+        return self.tag_name.title()
+
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -19,6 +22,9 @@ class Post(models.Model):
     post_rating = models.IntegerField(default=0)
 
     categories = models.ManyToManyField(Category, through="PostCategory")
+
+    def __str__(self):
+        return f'{self.post_title.title()}: {self.post_text}'
 
     def preview(self):
         if len(self.post_text) > 124:
