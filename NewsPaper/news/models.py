@@ -14,8 +14,15 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    POST = 'post'
+    ARTICLE = 'article'
+    POST_TYPE_CHOICES = [
+        (POST, 'Пост'),
+        (ARTICLE, 'Статья'),
+    ]
+
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    article_f_news_t = models.BooleanField(default=False)
+    post_type = models.CharField(max_length=10, choices=POST_TYPE_CHOICES, default=POST)
     release_datetime = models.DateTimeField(auto_now_add=True)
     post_title = models.CharField(max_length=255)
     post_text = models.TextField()
@@ -61,3 +68,4 @@ class Comment(models.Model):
         self.comment_rating -= 1
         self.save(update_fields=['comment_rating'])
 
+#
