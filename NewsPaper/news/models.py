@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 
@@ -68,4 +70,14 @@ class Comment(models.Model):
         self.comment_rating -= 1
         self.save(update_fields=['comment_rating'])
 
-#
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        related_name='subscriptions',
+    )
+    category = models.ForeignKey(
+        to='Category',
+        on_delete=models.CASCADE,
+        related_name='subscriptions',
+    )
